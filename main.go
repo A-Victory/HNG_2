@@ -34,24 +34,23 @@ func post(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Fprintln(w, "Error decoding json request")
 	}
-	if len(req.Operation_type) < 15 {
-		res.SlackUsername = user
-		res.Operation_type = req.Operation_type
+	res.SlackUsername = user
+	res.Operation_type = req.Operation_type
 
-		if strings.Contains(req.Operation_type, "add") {
-			res.Result = req.X + req.Y
-			json.NewEncoder(w).Encode(res)
-			return
-		} else if strings.Contains(req.Operation_type, "sub") {
-			res.Result = req.X - req.Y
-			json.NewEncoder(w).Encode(res)
-			return
-		} else if strings.Contains(req.Operation_type, "mul") {
-			res.Result = req.X * req.Y
-			json.NewEncoder(w).Encode(res)
-			return
-		}
+	if strings.Contains(req.Operation_type, "add") {
+		res.Result = req.X + req.Y
+		json.NewEncoder(w).Encode(res)
+		return
+	} else if strings.Contains(req.Operation_type, "sub") {
+		res.Result = req.X - req.Y
+		json.NewEncoder(w).Encode(res)
+		return
+	} else if strings.Contains(req.Operation_type, "mul") {
+		res.Result = req.X * req.Y
+		json.NewEncoder(w).Encode(res)
+		return
 	}
+
 }
 
 func main() {
